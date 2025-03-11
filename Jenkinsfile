@@ -3,7 +3,7 @@ pipeline {
     parameters {
         string(name: 'login', defaultValue: '', description: 'Ingrese el login')
         string(name: 'nameApellido', defaultValue: '', description: 'Ingrese nombre y apellido')
-        choice(name: 'departamento', choices: ['contabilidad', 'finanzas', 'tecnologia'], description: 'Seleccione el departamento')
+        string(name: 'departamento', defaultValue: '', description: 'Ingrese el departamento')
     }
     stages {
         stage('Input') {
