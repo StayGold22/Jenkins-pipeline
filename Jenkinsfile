@@ -10,7 +10,16 @@ pipeline {
             steps {
                 script {
                     def password = sh(script: "openssl rand -base64 12", returnStdout: true).trim()
-                     sh """
+                    def grupo = "${departamento}" 
+                
+                     
+                    # Verificación y creación del grupo
+                    sh """
+                    if ! grep -q "^${grupo}:" /etc/group; then
+                        echo "El grupo ${grupo} no existe. Creando grupo"
+                        sudo groupadd ${grupo}
+                    fi
+                    
                     if [ -d /home/${login} ]; then
                         echo "El directorio ya existe, se eliminara para crear uno nuevo.."
                         sudo rm -rf /home/${login}
@@ -18,7 +27,7 @@ pipeline {
                         echo 'generando usuario'
                     fi
                     # Crea el usuario
-                    echo sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash ${departamento}
+                    sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash ${grupo} ${login}
                     sleep 2
                     
                     # Se cambia la contraseña del usuario
