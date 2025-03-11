@@ -13,7 +13,7 @@ pipeline {
                     def grupo = "${departamento}" 
                 
                      
-                    # Verificación y creación del grupo
+                    ''' Verificación y creación del grupo '''
                     sh """
                     if ! grep -q "^${grupo}:" /etc/group; then
                         echo "El grupo ${grupo} no existe. Creando grupo"
