@@ -10,12 +10,13 @@ pipeline {
             steps {
                 script {
                     def password = sh(script: "openssl rand -base64 12", returnStdout: true).trim()
-                     
-                        sh sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash ${login}
-                        sh echo '${login}:${password}' | sudo chpasswd
-                        sh sudo chage -d 0 ${login}
-                        sh echo "Usuario creado: ${login}"
-                        sh echo "Contraseña temporal: ${password}"
+                     sh """
+                    sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash ${login}
+                    echo '${login}:${password}' | sudo chpasswd
+                    sudo chage -d 0 ${login}
+                    echo "Usuario creado: ${login}"
+                     echo "Contraseña temporal: ${password}"
+                     """
 
                 }
             }
