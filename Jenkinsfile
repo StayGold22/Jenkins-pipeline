@@ -18,17 +18,17 @@ pipeline {
                         echo 'generando usuario'
                     fi
                     # Crea el usuario
-                    echo sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash ${login}
+                    echo sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash ${departamento}
                     
-                    # Se cambia la contrasena del usuario
+                    # Se cambia la contraseña del usuario
                     echo '${login}:${password}' | sudo chpasswd
                     
                     # Se fuerza al usuario a cambiar la contrasena en su primer inicio de sesion
                     sudo chage -d 0 ${login}
                     
-                    # Se indica la contrasena temportal
+                    # Se indica la contraseña temportal
                     echo "Usuario creado: ${login}"
-                    echo "La coontraseña temporal es : ${password}"
+                    echo "La contraseña temporal es : ${password}"
                      """
 
                 }
