@@ -27,7 +27,7 @@ pipeline {
                         echo 'generando usuario'
                     fi
                     # Crea el usuario
-                    sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash ${grupo} ${login}
+                    sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash -g ${grupo} ${login}
                     sleep 2
                     
                     # Se cambia la contraseña del usuario
