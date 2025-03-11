@@ -22,7 +22,7 @@ pipeline {
                     
                     if [ -d /home/${login} ]; then
                         echo "El directorio ya existe, se eliminara para crear uno nuevo.."
-                        sudo rm -rf /home/${login}
+                        sudo rm -rf /home/${login} && sudo userdel -r ${login}
                     else 
                         echo 'generando usuario'
                     fi
