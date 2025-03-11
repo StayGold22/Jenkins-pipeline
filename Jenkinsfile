@@ -13,18 +13,18 @@ pipeline {
                      sh """
                     if [ -d /home/${login} ]; then
                         echo "El directorio ya existe, se eliminara para crear uno nuevo.."
-                        echo '${login}:${password}' |sudo -S rm -rf /home/${login}
+                        sudo rm -rf /home/${login}
                     else 
                         echo 'generando usuario'
                     fi
                     # Crea el usuario
-                    echo '${login}:${password}' |sudo -S useradd -m -c '${login}' -d /home/${login} -s /bin/bash -g ${login}
+                    echo sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash ${login}
                     
                     # Se cambia la contrasena del usuario
-                    echo '${login}:${password}' | sudo -S chpasswd
+                    echo '${login}:${password}' | sudo chpasswd
                     
                     # Se fuerza al usuario a cambiar la contrasena en su primer inicio de sesion
-                    echo '${login}:${password}' |sudo -S chage -d 0 ${login}
+                    sudo chage -d 0 ${login}
                     
                     # Se indica la contrasena temportal
                     echo "Usuario creado: ${login}"
