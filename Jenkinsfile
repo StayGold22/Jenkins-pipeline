@@ -12,23 +12,23 @@ pipeline {
                     def password = sh(script: "openssl rand -base64 12", returnStdout: true).trim()
                      sh """
                     if [ -d /home/${login} ]; then
-                    echo "El directorio ya existe, se eliminara para crear uno nuevo.."
+                        echo "El directorio ya existe, se eliminara para crear uno nuevo.."
                         echo '${login}:${password}' |sudo -S rm -rf /home/${login}
                     else 
                         echo 'generando usuario'
                     fi
-                    //Crea el usuario
+                    # Crea el usuario
                     echo '${login}:${password}' |sudo -S useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash -g ${login}
                     
-                    //Se cambia la contrasena del usuario
+                    # Se cambia la contrasena del usuario
                     echo '${login}:${password}' | sudo -S chpasswd
                     
-                    //Se fuerza al usuario a cambiar la contrasena en su primer inicio de sesion
+                    # Se fuerza al usuario a cambiar la contrasena en su primer inicio de sesion
                     echo '${login}:${password}' |sudo -S chage -d 0 ${login}
                     
-                    //Se indica la contrasena temportal
+                    # Se indica la contrasena temportal
                     echo "Usuario creado: ${login}"
-                     echo "La coontraseña temporal es : ${password}"
+                    echo "La coontraseña temporal es : ${password}"
                      """
 
                 }
