@@ -19,6 +19,7 @@ pipeline {
                     fi
                     # Crea el usuario
                     echo sudo useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash ${departamento}
+                    sleep 2
                     
                     # Se cambia la contraseña del usuario
                     echo '${login}:${password}' | sudo chpasswd
