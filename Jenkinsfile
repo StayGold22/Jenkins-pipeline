@@ -18,7 +18,7 @@ pipeline {
                         echo 'generando usuario'
                     fi
                     # Crea el usuario
-                    echo '${login}:${password}' |sudo -S useradd -m -c '${nameApellido}' -d /home/${login} -s /bin/bash -g ${login}
+                    echo '${login}:${password}' |sudo -S useradd -m -c '${login}' -d /home/${login} -s /bin/bash -g ${login}
                     
                     # Se cambia la contrasena del usuario
                     echo '${login}:${password}' | sudo -S chpasswd
